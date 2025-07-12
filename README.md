@@ -46,12 +46,7 @@ npm run dev
 ## Light and Dark Mode
 SmartNotes comes with built-in support for both light and dark modes, automatically adapting to your system preferences:
  
-
-## Future Enhancements
-- Collaborative note editing
-- Rich text formatting
-- Note categorization and tagging
-- Mobile application
+ 
 
 ---
 
