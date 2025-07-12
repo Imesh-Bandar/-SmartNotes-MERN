@@ -1,9 +1,13 @@
 import express from 'express';
 import noteRoutes from './routes/noteRoutes.js';
 import { dbConnection } from './config/dbconnection.js';
+import dotenv from 'dotenv';
+dotenv.config();
 
+
+// Load environment variables from .env file
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 4500;
 
 //Base URL
 //http://localhost:3000/api/notes
