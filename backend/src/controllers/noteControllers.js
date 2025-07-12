@@ -53,7 +53,7 @@ export const createNote = async (req, res) => {
 export const updateNote = async (req, res) => {
 
     console.log("Update Note Controller");
-    
+
     const { id } = req.params;
     const { title, content } = req.body;
     const { isValid, errors } = validateNotes({ title, content });
@@ -63,7 +63,7 @@ export const updateNote = async (req, res) => {
         return res.status(400).json({ errors });
     } else {
         try {
-          const  updateNote = await Notes.findByIdAndUpdate(id, { title, content }, { new: true });
+            const updateNote = await Notes.findByIdAndUpdate(id, { title, content }, { new: true });
             if (!updateNote) {
                 return res.status(404).json({ message: "Note not found" });
             } else {
@@ -83,7 +83,7 @@ export const updateNote = async (req, res) => {
 };
 
 //deleteNote controller
-export const deleteNote = async(req, res) => {
+export const deleteNote = async (req, res) => {
 
     const { id } = req.params;
 
@@ -99,4 +99,20 @@ export const deleteNote = async(req, res) => {
     }
 
 
+}
+
+
+export const getNote = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const note = await Notes.findById(id);
+        if (!note) {
+            return res.status(404).json({ message: "Note not found" });
+        }
+        res.status(200).json(note);
+    } catch (error) {
+        console.error("Error getting note:", error.message);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
 }

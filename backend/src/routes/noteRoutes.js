@@ -1,7 +1,7 @@
 import express from 'express';
 import {
 
-    getNotes, createNote, updateNote, deleteNote
+    getNotes, createNote, updateNote, deleteNote, getNote
 
 } from '../controllers/noteControllers.js'
 
@@ -15,9 +15,11 @@ app.use(express.json());
 // @baseURL http://localhost:3000/api/notes
 
 router.get("/", getNotes);
+router.get("/:id", getNote);  
 router.post("/createNote", createNote);
 router.put("/edit/:id", updateNote);
 router.delete("/deleteNote/:id", deleteNote);
+
 
 
 // router.get("/", (req, res) => {
