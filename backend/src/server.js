@@ -8,7 +8,7 @@ dotenv.config();
 // Load environment variables from .env file
 const app = express();
 const PORT = process.env.PORT || 4500;
-
+app.use(express.json()); // Middleware to parse JSON bodies
 //Base URL
 //http://localhost:3000/api/notes
 
