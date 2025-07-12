@@ -1,11 +1,15 @@
 import express from 'express';
 import noteRoutes from './routes/noteRoutes.js';
+import { dbConnection } from './config/dbconnection.js';
 
 const app = express();
 const PORT = 3000;
 
 //Base URL
 //http://localhost:3000/api/notes
+
+//kQZAHt71TBqVB6Ft
+
 
 
 
@@ -35,5 +39,6 @@ app.use("/api/notes", noteRoutes);
 // });
 
 app.listen(PORT, () => {
+    dbConnection();
     console.log(`Server is running on port ${PORT}`);
 });
