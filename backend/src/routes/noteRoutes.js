@@ -7,14 +7,16 @@ import {
 
 const router = express.Router();
 
-
+const app= express();
+// Middleware to parse JSON bodies
+app.use(express.json());
 
 
 // @baseURL http://localhost:3000/api/notes
 
 router.get("/", getNotes);
 router.post("/createNote", createNote);
-router.put("/updateNote/:id", updateNote);
+router.put("/edit/:id", updateNote);
 router.delete("/deleteNote/:id", deleteNote);
 
 
