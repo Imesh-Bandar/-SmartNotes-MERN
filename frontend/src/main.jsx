@@ -7,7 +7,7 @@ import { Toaster } from 'react-hot-toast'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
-      <App />
+      <App  data-theme="forest"/>
       <Toaster />
     </BrowserRouter>
   </StrictMode>,
