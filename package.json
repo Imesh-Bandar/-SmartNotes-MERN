@@ -1,0 +1,21 @@
+{
+  "name": "-smartnotes-mern",
+  "version": "1.0.0",
+  "description": "A full-stack Note Taking Application built using the MERN stack (MongoDB, Express.js, React.js, Node.js).",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend",
+    "start": "npm run start --prefix backend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Imesh-Bandar/-SmartNotes-MERN.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Imesh-Bandar/-SmartNotes-MERN/issues"
+  },
+  "homepage": "https://github.com/Imesh-Bandar/-SmartNotes-MERN#readme"
+}

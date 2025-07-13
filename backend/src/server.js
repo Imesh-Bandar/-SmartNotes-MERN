@@ -7,6 +7,7 @@ import cors from 'cors';
 import noteRoutes from './routes/noteRoutes.js';
 import { dbConnection } from './config/dbconnection.js';
 import rateLimiter from './middleware/rateLimiter.js';
+import path from 'path';
 dotenv.config();
 
 
@@ -19,11 +20,32 @@ app.use(express.json()); // Middleware to parse JSON bodies
 
 //kQZAHt71TBqVB6Ft
 
-app.use(cors({
-    origin: 'http://localhost:5173', // Adjust this to your frontend URL        
 
-}));
+if (process.env.NODE_ENV !== 'production') {
+
+    app.use(cors({
+        origin: 'http://localhost:5173', // Adjust this to your frontend URL        
+
+
+    }));
+}
+
+
+const __dirname = path.resolve();
+
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '../frontend/dist')));
+}
+
+
+app.use(express.static(path.join(__dirname, "../frontend/dist"))); // Serve static files from the frontend build directory
 // Middleware to log requests
+app.use("*", (req, res, next) => {
+    res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
+
+})
+
+
 app.use(rateLimiter)
 
 
