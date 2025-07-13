@@ -5,9 +5,7 @@ const NavbarComponent = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [theme, setTheme] = useState('light')
     const location = useLocation()
-
     const isActive = (path) => location.pathname === path
-
     const toggleTheme = () => {
         const newTheme = theme === 'light' ? 'dark' : 'light'
         setTheme(newTheme)
@@ -18,18 +16,10 @@ const NavbarComponent = () => {
         <div className="w-full drawer">
             <input id="my-drawer-3" type="checkbox" className="drawer-toggle" checked={isMenuOpen} onChange={() => setIsMenuOpen(!isMenuOpen)} />
             <div className="drawer-content flex flex-col">
+                {/* Header */}
                 <header className="navbar bg-base-100 fixed top-0 z-50 shadow-lg backdrop-blur-sm bg-opacity-90">
                     <div className="container mx-auto px-4">
-                        <div className="flex-1">
-                            <div className="flex items-center gap-2 pl-0">
-                                <div className="avatar">
-                                    <div className="w-8 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                                        <img src="/smart-notes-logo.png" alt="SN" />
-                                    </div>
-                                </div>
-                                <h2 className="text-xl font-bold text-primary">SmartNotes</h2>
-                            </div>
-                        </div>
+
 
                         <div className="flex-none lg:hidden">
                             <label htmlFor="my-drawer-3" className="btn btn-square btn-ghost">
@@ -41,10 +31,15 @@ const NavbarComponent = () => {
 
                         <div className="flex-none hidden lg:block">
                             <div className="flex items-center gap-2">
-                                <div className="form-control">
-                                    <input type="text" placeholder="Search notes..." className="input input-bordered input-sm w-48 md:w-64" />
+                                <div className="flex-1">
+                                    <div className="flex items-center pl-0">
+                                        <h2 className="text-xl font-bold text-primary">SmartNotes</h2>
+                                    </div>
                                 </div>
 
+
+
+                                {/* Nav Menu */}
                                 <nav className="menu menu-horizontal px-1 gap-2">
                                     <Link to={"/"} className={`btn btn-sm ${isActive('/') ? 'btn-primary' : 'btn-ghost'} hover:scale-105 transition-transform`}>
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -58,7 +53,7 @@ const NavbarComponent = () => {
                                         </svg>
                                         About
                                     </Link>
-                                    <Link to={"/create"} className="btn btn-sm btn-primary hover:scale-105 transition-transform">
+                                    <Link to={"/create"} className="btn btn-sm  hover:scale-105 transition-transform">
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
                                         </svg>
@@ -66,6 +61,7 @@ const NavbarComponent = () => {
                                     </Link>
                                 </nav>
 
+                                {/* Light and Darkmode button */}
                                 <button onClick={toggleTheme} className="btn btn-ghost btn-circle">
                                     {theme === 'light' ? (
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -83,6 +79,7 @@ const NavbarComponent = () => {
                 </header>
             </div>
 
+            {/* MOBLE VIEW */}
             {/* Mobile drawer */}
             <div className="drawer-side">
                 <label htmlFor="my-drawer-3" className="drawer-overlay"></label>

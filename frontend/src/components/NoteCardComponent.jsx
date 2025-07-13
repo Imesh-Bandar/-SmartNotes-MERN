@@ -2,8 +2,15 @@ import React from 'react'
 import { Link } from 'react-router'
 import api from '../lib/axios.js'
 import toast from 'react-hot-toast'
-
+import { useEffect } from 'react'
 const NoteCardComponent = ({ note, fetchNotes }) => {
+
+    useEffect(() => {
+        fetchNotes();
+    }
+        , []);
+
+
     const handleDelete = async (e, id) => {
         e.preventDefault();//stop navigation
         const confirmed = window.confirm("Are you sure you want to delete this note?");
@@ -13,6 +20,7 @@ const NoteCardComponent = ({ note, fetchNotes }) => {
             toast.success("Note deleted successfully");
             fetchNotes(); // Refresh notes after deletion
             // Optionally, trigger a refresh or callback here
+
         } catch (error) {
             toast.error("Failed to delete note");
         }
