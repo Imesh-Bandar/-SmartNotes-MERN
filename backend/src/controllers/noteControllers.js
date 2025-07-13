@@ -101,6 +101,7 @@ export const deleteNote = async (req, res) => {
 
 }
 
+//getNote controller
 
 export const getNote = async (req, res) => {
     const { id } = req.params;
