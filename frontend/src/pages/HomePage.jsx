@@ -31,8 +31,8 @@ const HomePage = () => {
             const response = await api.get("/notes");
             const data = response.data;
 
-            //console.log(data);
-            setNotes(data);
+            // Ensure notes is always an array
+            setNotes(Array.isArray(data) ? data : []);
         } catch (error) {
             console.error(error);
             //toast.error(error.message);
@@ -70,7 +70,7 @@ const HomePage = () => {
                 ) : (
                     !isRateLimited && (
                         <>
-                            {notes.length === 0 ? (
+                            {(Array.isArray(notes) ? notes.length : 0) === 0 ? (
                                 <div className="w-full flex justify-center items-center">
                                     <div className="max-w-xl w-full">
                                         <NotFoundPage fetchNotes={fetchNotes} />
@@ -78,7 +78,7 @@ const HomePage = () => {
                                 </div>
                             ) : (
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4 justify-items-center">
-                                    {notes.map((note) => (
+                                    {(Array.isArray(notes) ? notes : []).map((note) => (
                                         <div
                                             key={note._id}
                                             className="card-container hover:scale-105 transition-transform duration-200"
@@ -98,6 +98,6 @@ const HomePage = () => {
 };
 
 // Create a simplified version of the "no notes" message that fits the homepage better
- 
+
 
 export default HomePage;

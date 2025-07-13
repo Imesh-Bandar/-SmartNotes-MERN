@@ -32,7 +32,7 @@ SmartNotes is a modern, full-stack note-taking application built with the **MERN
 - 🗂️ View all notes in a responsive grid
 - ⚡ Real-time updates and instant feedback
 - 🌗 Light and dark mode support
-- 🛡️ Rate limiting to prevent abuse
+- 🛡️ Rate limiting to prevent abuse *(has rate limit function)*
 - 🎨 User-friendly error and loading states
 
 ---
