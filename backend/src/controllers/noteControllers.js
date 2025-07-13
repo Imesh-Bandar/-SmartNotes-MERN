@@ -7,7 +7,7 @@ import { validateNotes } from "../utils/validator.js";
 //getNots controller
 export const getNotes = async (req, res) => {
     try {
-        const notes = await Notes.find({});
+        const notes = await Notes.find({}).sort({ createdAt: -1 });// Fetch all notes sorted by creation date in descending order
 
         if (!notes || notes.length === 0) {
             return res.status(404).json({ message: "No notes found" });
