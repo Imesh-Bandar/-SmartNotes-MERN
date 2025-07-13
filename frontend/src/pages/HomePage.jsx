@@ -7,6 +7,7 @@ import axios from "axios";
 
 import toast from "react-hot-toast";
 import NoteCardComponent from "../components/NoteCardComponent.jsx";
+import { Link } from "react-router";
 const HomePage = () => {
     const [isRateLimited, setIsRateLimited] = useState(false);
     const [notes, setNotes] = useState([]); // Assuming you might want to manage notes in the future
@@ -14,36 +15,37 @@ const HomePage = () => {
 
     //data fetching function for notes
 
-    useEffect(() => {
-        const fetchNotes = async () => {
-            try {
-                const response = await api.get("/notes");
-                const data = response.data;
-                console.log(data);
-                setNotes(data);
-            } catch (error) {
-                console.error(error);
-                //toast.error(error.message);
-                // error status code ==429
-                if (error.response?.status === 429) {
-                    setIsRateLimited(true);
-                    toast.error("Rate limit exceeded. Please try again later.", {
-                        duration: 4000,
-                        icon: "⏳",
-                        id: "rate-limit",
-                        style: { background: "#fff3cd", color: "#856404" },
-                        position: "top-center",
-                        // Provide a close button
-                        action: {
-                            text: "Close",
-                            onClick: (t) => toast.dismiss(t.id),
-                        },
-                    });
-                }
-            } finally {
-                setLoading(false);
+    const fetchNotes = async () => {
+        try {
+            const response = await api.get("/notes");
+            const data = response.data;
+            console.log(data);
+            setNotes(data);
+        } catch (error) {
+            console.error(error);
+            //toast.error(error.message);
+            // error status code ==429
+            if (error.response?.status === 429) {
+                setIsRateLimited(true);
+                toast.error("Rate limit exceeded. Please try again later.", {
+                    duration: 4000,
+                    icon: "⏳",
+                    id: "rate-limit",
+                    style: { background: "#fff3cd", color: "#856404" },
+                    position: "top-center",
+                    // Provide a close button
+                    action: {
+                        text: "Close",
+                        onClick: (t) => toast.dismiss(t.id),
+                    },
+                });
             }
-        };
+        } finally {
+            setLoading(false);
+        }
+    };
+    useEffect(() => {
+
         fetchNotes();
     }, []);
 
@@ -52,7 +54,7 @@ const HomePage = () => {
             <NavbarComponent />
 
             {isRateLimited && <RateLimitedUI />}
-          
+
 
             <div className="hero bg-base-100 shadow-lg py-8 mb-8">
                 <div className="hero-content text-center">
@@ -86,7 +88,11 @@ const HomePage = () => {
                                     <div className="card bg-base-100 shadow-xl p-6">
                                         <h2 className="text-2xl font-semibold mb-2">No Notes Yet</h2>
                                         <p className="text-base-content/70">Start creating your first note!</p>
-                                        <button className="btn btn-primary mt-4">Create Note</button>
+                                        
+                                        <Link to={"/create"} className="btn btn-primary mt-4">
+                                            Create Note
+                                            </Link>
+                                         
                                     </div>
                                 </div>
                             ) : (
@@ -95,7 +101,7 @@ const HomePage = () => {
                                         key={note._id}
                                         className="card-container hover:scale-105 transition-transform duration-200"
                                     >
-                                        <NoteCardComponent note={note} />
+                                        <NoteCardComponent note={note}  fetchNotes={fetchNotes}/>
                                     </div>
                                 ))
                             )}
